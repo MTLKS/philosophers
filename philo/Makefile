@@ -1,6 +1,7 @@
 NAME		= philo
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -pthread
+CFLAGS		= -Wall -Wextra -Werror
+# CFLAGS2		= -g -fsanitize=thread
 RM			= rm -rf
 
 INCLUDES	= ./includes
@@ -13,10 +14,10 @@ OBJS	= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRCS)))))
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
-			$(CC) $(CFLAGS) $^ $(MLXFLAGS) -I$(INCLUDES) -L$(LIBFT) -lft -o $@
+			$(CC) $(CFLAGS) $(CFLAGS2) $^ -I$(INCLUDES) -o $@
 
 $(OBJ_PATH)/%.o:	$(SRC_PATH)/%.c* | $(OBJ_PATH)
-					$(CC) $(CFLAGS) $(MLXFLAGS2) -c -I$(INCLUDES) $< -o $@
+					$(CC) $(CFLAGS) $(CFLAGS2) -c -I$(INCLUDES) $< -o $@
 
 $(OBJ_PATH):
 				mkdir -p $(OBJ_PATH)
