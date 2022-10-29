@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:50:04 by maliew            #+#    #+#             */
-/*   Updated: 2022/10/29 12:44:03 by maliew           ###   ########.fr       */
+/*   Updated: 2022/10/29 16:31:37 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	philo_init_fork(t_table *table)
 void	philo_init_philo(t_table *table)
 {
 	int		i;
+	char	*tmp;
 
 	table->philos = (t_philo *)malloc(table->philo_amt * sizeof(t_philo));
 	if (table->philos == NULL)
@@ -34,6 +35,10 @@ void	philo_init_philo(t_table *table)
 		table->philos[i].number = i + 1;
 		table->philos[i].eat_count = 0;
 		table->philos[i].last_eat = 0;
+		tmp = philo_sem_join("m_last_eat", i);
+		table->philos[i].m_last_eat = sem_open(tmp, O_CREAT, 0644, 1);
+		sem_unlink(tmp);
+		free(tmp);
 	}
 }
 

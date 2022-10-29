@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 13:33:45 by maliew            #+#    #+#             */
-/*   Updated: 2022/10/29 13:49:47 by maliew           ###   ########.fr       */
+/*   Updated: 2022/10/29 15:05:01 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ int	philo_check(int argc, char **argv)
 
 int	philo_check_death(t_philo *philo)
 {
-	return (philo_last_eat(philo, GET) + philo->table->t2die
-		< philo_get_timestamp(philo->table->start_time));
+	int	dead;
+
+	dead = philo_last_eat(philo, GET) + philo->table->t2die
+		< philo_get_timestamp(philo->table->start_time);
+	return (dead);
 }
 
 void	philo_check_win(t_table *table)

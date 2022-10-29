@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:37:43 by maliew            #+#    #+#             */
-/*   Updated: 2022/10/29 12:52:41 by maliew           ###   ########.fr       */
+/*   Updated: 2022/10/29 16:32:17 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ int	philo_last_eat(t_philo *philo, int type)
 {
 	int	ret;
 
+	sem_wait(philo->m_last_eat);
 	if (type == SET)
 		philo->last_eat = philo_get_timestamp(philo->table->start_time);
 	ret = philo->last_eat;
+	sem_post(philo->m_last_eat);
 	return (ret);
 }
 
@@ -50,4 +52,23 @@ int	philo_print(t_philo *philo, int message)
 	printf("\n");
 	sem_post(philo->table->m_message);
 	return (0);
+}
+
+char	*philo_sem_join(char *str, int num)
+{
+	char	*ret;
+	int		i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	ret = malloc((i + 4) * sizeof(char));
+	i = -1;
+	while (str[++i])
+		ret[i] = str[i];
+	ret[i] = (num / 100) + '0';
+	ret[++i] = (num / 10 % 10) + '0';
+	ret[++i] = (num % 10) + '0';
+	ret[++i] = 0;
+	return (ret);
 }

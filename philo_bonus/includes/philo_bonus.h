@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:31:22 by maliew            #+#    #+#             */
-/*   Updated: 2022/10/29 12:52:49 by maliew           ###   ########.fr       */
+/*   Updated: 2022/10/29 16:32:01 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_philo
 	int				number;
 	int				eat_count;
 	int				last_eat;
+	sem_t			*m_last_eat;
 	pthread_t		death_thread;
 	struct s_table	*table;
 }	t_philo;
