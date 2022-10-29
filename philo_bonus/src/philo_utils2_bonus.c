@@ -37,11 +37,6 @@ int	philo_last_eat(t_philo *philo, int type)
 int	philo_print(t_philo *philo, int message)
 {
 	sem_wait(philo->table->m_message);
-	if (philo_check_death(philo) != 0)
-	{
-		sem_post(philo->table->m_message);
-		return (1);
-	}
 	printf("%d ", philo_get_timestamp(philo->table->start_time));
 	printf("%d ", philo->number);
 	if (message == TAKEN_FORK)

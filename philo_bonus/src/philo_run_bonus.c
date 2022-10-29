@@ -44,7 +44,7 @@ void	*philo_death_thread(void *arg)
 	philo = (t_philo *)arg;
 	while (philo_check_death(philo) == 0)
 		usleep(500);
-	philo_exit(philo->table);
+	exit(0);
 	return (NULL);
 }
 
@@ -57,7 +57,7 @@ void	*philo_routine(void *arg)
 		philo_usleep(1000);
 	pthread_create(&philo->death_thread, NULL, philo_death_thread, philo);
 	pthread_detach(philo->death_thread);
-	while (philo_check_death(philo) == 0)
+	while (1)
 	{
 		if (philo_take_fork(philo)
 			|| philo_eat(philo)

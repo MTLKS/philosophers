@@ -59,7 +59,7 @@ void	philo_check_status(t_table *table)
 	int	checker_pid;
 	int	new_pid;
 	int	i;
-	int	dead_philo_num;
+	int	philo_num;
 
 	checker_pid = fork();
 	if (checker_pid == 0)
@@ -71,11 +71,12 @@ void	philo_check_status(t_table *table)
 		if (table->philos[i].pid != new_pid)
 			kill(table->philos[i].pid, SIGINT);
 		else
-			dead_philo_num = i + 1;
+			philo_num = i + 1;
 	}
 	if (checker_pid != new_pid)
 	{
 		kill(checker_pid, SIGINT);
-		printf("%d died\n", dead_philo_num);
+		printf("%d %d died\n",
+			philo_get_timestamp(table->start_time), philo_num);
 	}
 }
